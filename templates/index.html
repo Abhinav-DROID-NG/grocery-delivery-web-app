@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery Delivery - Fresh Groceries at Your Doorstep</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>🛒 Grocery Delivery</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/products">Products</a></li>
+                <li><a href="/cart" class="cart-link">Cart <span class="cart-count">0</span></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Fresh Groceries Delivered to Your Door</h2>
+            <p>Quality products at affordable prices</p>
+            <a href="/products" class="btn btn-primary">Shop Now</a>
+        </div>
+    </section>
+
+    <section class="features container">
+        <div class="feature">
+            <span class="icon">🚚</span>
+            <h3>Fast Delivery</h3>
+            <p>Get your groceries delivered within 24 hours</p>
+        </div>
+        <div class="feature">
+            <span class="icon">✅</span>
+            <h3>Fresh Quality</h3>
+            <p>Hand-picked fresh products directly from suppliers</p>
+        </div>
+        <div class="feature">
+            <span class="icon">💰</span>
+            <h3>Best Prices</h3>
+            <p>Competitive prices with great discounts</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 Grocery Delivery. All rights reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
