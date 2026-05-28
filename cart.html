@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart — FreshMart</title>
+  <link rel="stylesheet" href="static/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-logo" href="index.html">🌿 FreshMart</a>
+    <div class="navbar-search">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" placeholder="Search for groceries…">
+    </div>
+    <div class="navbar-actions">
+      <a class="nav-link" href="login.html">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Sign in
+      </a>
+      <a class="cart-btn" href="cart.html" style="background:var(--green-md);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Cart <span class="cart-count">0</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<main class="container" style="padding-top:28px;padding-bottom:48px;">
+
+  <div class="breadcrumb">
+    <a href="index.html">Home</a>
+    <span class="breadcrumb-sep">›</span>
+    <span>Cart</span>
+  </div>
+
+  <div class="page-header">
+    <h1>Your cart <span id="cart-item-count" style="font-size:16px;font-weight:500;color:var(--text-2)"></span></h1>
+  </div>
+
+  <!-- Empty State -->
+  <div id="cart-empty" class="cart-empty" style="display:none;">
+    <div class="empty-icon">🛒</div>
+    <h3>Your cart is empty</h3>
+    <p>Add some fresh groceries to get started!</p>
+    <a class="btn btn-primary mt-3" href="products.html">Browse products</a>
+  </div>
+
+  <!-- Cart Layout -->
+  <div class="cart-layout">
+    <!-- Items -->
+    <div id="cart-items" class="cart-items"></div>
+
+    <!-- Summary -->
+    <div id="order-summary" class="order-summary">
+      <div class="os-title">Order summary</div>
+
+      <!-- Promo -->
+      <div class="promo-row">
+        <input class="promo-input" id="promo-input" placeholder="Promo code (try FRESH20)">
+        <button class="promo-btn" id="promo-apply">Apply</button>
+      </div>
+
+      <div class="os-row"><span>Subtotal</span><span id="os-subtotal">₹0</span></div>
+      <div class="os-row savings" id="savings-row" style="display:none;"><span>🏷 Promo discount</span><span id="os-savings">−₹0</span></div>
+      <div class="os-row"><span>Delivery</span><span id="os-delivery">₹25</span></div>
+      <div class="os-row"><span style="font-size:11px;color:var(--text-3)">Free delivery over ₹299</span><span></span></div>
+      <div class="os-row total"><span>Total</span><span id="os-total">₹0</span></div>
+
+      <button class="checkout-btn" id="checkout-btn">Place order →</button>
+      <div class="os-trust">🔒 Secure checkout &nbsp;·&nbsp; Easy returns</div>
+
+      <!-- Delivery Info -->
+      <div style="margin-top:16px;padding:12px;background:var(--green-pale);border-radius:var(--radius-sm);">
+        <div style="font-size:12px;font-weight:600;color:var(--green);margin-bottom:4px;">⚡ Express delivery</div>
+        <div style="font-size:12px;color:var(--text-2);">Estimated delivery: <strong>25–35 min</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Continue shopping -->
+  <div style="margin-top:24px;">
+    <a href="products.html" class="btn btn-ghost btn-sm">← Continue shopping</a>
+  </div>
+
+</main>
+
+<script src="static/js/script.js"></script>
+</body>
+</html>

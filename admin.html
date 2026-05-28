@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — FreshMart</title>
+  <link rel="stylesheet" href="static/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-logo" href="index.html">🌿 FreshMart</a>
+    <div style="flex:1;"></div>
+    <div class="navbar-actions">
+      <span style="font-size:12px;color:var(--text-3);padding:0 8px;">Admin panel</span>
+      <a class="nav-link" href="index.html">← View store</a>
+    </div>
+  </div>
+</nav>
+
+<main class="container" style="padding-top:28px;padding-bottom:48px;">
+
+  <div class="admin-layout">
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-brand">
+        <span>Admin</span>
+        <span class="badge badge-success" style="font-size:10px;">Live</span>
+      </div>
+
+      <div class="sidebar-label">Overview</div>
+      <a class="sidebar-item active" href="admin.html">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </a>
+      <a class="sidebar-item" href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        Products
+      </a>
+      <a class="sidebar-item" href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        Orders
+      </a>
+      <a class="sidebar-item" href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Customers
+      </a>
+
+      <div class="sidebar-label">Analytics</div>
+      <a class="sidebar-item" href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Sales report
+      </a>
+      <a class="sidebar-item" href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Delivery stats
+      </a>
+
+      <div class="sidebar-label">System</div>
+      <a class="sidebar-item" href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 0-14.14 0"/><path d="M4.93 19.07a10 10 0 0 0 14.14 0"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/></svg>
+        Settings
+      </a>
+      <a class="sidebar-item danger" href="login.html">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Logout
+      </a>
+    </aside>
+
+    <!-- Content -->
+    <div class="admin-content">
+
+      <div class="page-header">
+        <h1>Dashboard</h1>
+        <p>Overview for today, Thursday 29 May 2025</p>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Total orders</div>
+          <div class="stat-val">1,284</div>
+          <div class="stat-change up">↑ 12% this week</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Revenue</div>
+          <div class="stat-val">₹84.2k</div>
+          <div class="stat-change up">↑ 8% this week</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Active users</div>
+          <div class="stat-val">342</div>
+          <div class="stat-change dn">↓ 3% this week</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Products listed</div>
+          <div class="stat-val">87</div>
+          <div class="stat-change up">4 added today</div>
+        </div>
+      </div>
+
+      <!-- Mini chart placeholder -->
+      <div class="admin-card mb-3">
+        <div class="admin-card-header">
+          <h3>Revenue (last 7 days)</h3>
+          <span class="badge badge-success">↑ Trending up</span>
+        </div>
+        <div style="padding:20px;">
+          <div style="display:flex;align-items:flex-end;gap:10px;height:80px;">
+            <!-- Simple bar chart using CSS -->
+            <div style="flex:1;display:flex;align-items:flex-end;gap:6px;height:100%;">
+              <div style="flex:1;background:var(--green-bg);border-radius:4px 4px 0 0;height:45%;position:relative;">
+                <div style="position:absolute;bottom:-18px;width:100%;text-align:center;font-size:10px;color:var(--text-3);">Mon</div>
+              </div>
+              <div style="flex:1;background:var(--green-bg);border-radius:4px 4px 0 0;height:60%;position:relative;">
+                <div style="position:absolute;bottom:-18px;width:100%;text-align:center;font-size:10px;color:var(--text-3);">Tue</div>
+              </div>
+              <div style="flex:1;background:var(--green-bg);border-radius:4px 4px 0 0;height:55%;position:relative;">
+                <div style="position:absolute;bottom:-18px;width:100%;text-align:center;font-size:10px;color:var(--text-3);">Wed</div>
+              </div>
+              <div style="flex:1;background:var(--green-lt);border-radius:4px 4px 0 0;height:80%;position:relative;">
+                <div style="position:absolute;bottom:-18px;width:100%;text-align:center;font-size:10px;color:var(--text-3);">Thu</div>
+              </div>
+              <div style="flex:1;background:var(--green-bg);border-radius:4px 4px 0 0;height:70%;position:relative;">
+                <div style="position:absolute;bottom:-18px;width:100%;text-align:center;font-size:10px;color:var(--text-3);">Fri</div>
+              </div>
+              <div style="flex:1;background:var(--green);border-radius:4px 4px 0 0;height:95%;position:relative;">
+                <div style="position:absolute;bottom:-18px;width:100%;text-align:center;font-size:10px;color:var(--text-3);">Sat</div>
+              </div>
+              <div style="flex:1;background:var(--green-bg);border-radius:4px 4px 0 0;height:75%;position:relative;">
+                <div style="position:absolute;bottom:-18px;width:100%;text-align:center;font-size:10px;color:var(--text-3);">Sun</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inventory Table -->
+      <div class="admin-card mb-3">
+        <div class="admin-card-header">
+          <h3>Product inventory</h3>
+          <button class="btn btn-primary btn-sm table-add">+ Add product</button>
+        </div>
+        <div style="overflow-x:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>🥦 Fresh Broccoli</td>
+                <td><span class="badge badge-gray">Vegetables</span></td>
+                <td>₹49</td>
+                <td>124 units <div class="stock-bar"><div class="stock-fill" style="width:80%;background:var(--green)"></div></div></td>
+                <td><span class="badge badge-success">Active</span></td>
+                <td><div class="td-actions"><button class="action-btn edit">Edit</button><button class="action-btn del">Delete</button></div></td>
+              </tr>
+              <tr>
+                <td>🍎 Shimla Apples</td>
+                <td><span class="badge badge-gray">Fruits</span></td>
+                <td>₹149</td>
+                <td>38 units <div class="stock-bar"><div class="stock-fill" style="width:30%;background:var(--warn)"></div></div></td>
+                <td><span class="badge badge-warn">Low stock</span></td>
+                <td><div class="td-actions"><button class="action-btn edit">Edit</button><button class="action-btn del">Delete</button></div></td>
+              </tr>
+              <tr>
+                <td>🥛 Full Cream Milk</td>
+                <td><span class="badge badge-gray">Dairy</span></td>
+                <td>₹65</td>
+                <td>200 units <div class="stock-bar"><div class="stock-fill" style="width:95%;background:var(--green)"></div></div></td>
+                <td><span class="badge badge-success">Active</span></td>
+                <td><div class="td-actions"><button class="action-btn edit">Edit</button><button class="action-btn del">Delete</button></div></td>
+              </tr>
+              <tr>
+                <td>🧅 Brown Onions</td>
+                <td><span class="badge badge-gray">Vegetables</span></td>
+                <td>₹39</td>
+                <td>0 units <div class="stock-bar"><div class="stock-fill" style="width:2%;background:var(--danger)"></div></div></td>
+                <td><span class="badge badge-danger">Out of stock</span></td>
+                <td><div class="td-actions"><button class="action-btn edit">Edit</button><button class="action-btn del">Delete</button></div></td>
+              </tr>
+              <tr>
+                <td>🥚 Farm Eggs</td>
+                <td><span class="badge badge-gray">Dairy</span></td>
+                <td>₹89</td>
+                <td>55 units <div class="stock-bar"><div class="stock-fill" style="width:55%;background:var(--green)"></div></div></td>
+                <td><span class="badge badge-success">Active</span></td>
+                <td><div class="td-actions"><button class="action-btn edit">Edit</button><button class="action-btn del">Delete</button></div></td>
+              </tr>
+              <tr>
+                <td>🍌 Bananas</td>
+                <td><span class="badge badge-gray">Fruits</span></td>
+                <td>₹35</td>
+                <td>88 units <div class="stock-bar"><div class="stock-fill" style="width:70%;background:var(--green)"></div></div></td>
+                <td><span class="badge badge-success">Active</span></td>
+                <td><div class="td-actions"><button class="action-btn edit">Edit</button><button class="action-btn del">Delete</button></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Recent Orders -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h3>Recent orders</h3>
+          <a href="#" style="font-size:12px;color:var(--green);">View all →</a>
+        </div>
+        <div style="overflow-x:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-family:monospace;font-size:12px;">#FM-1042</td>
+                <td>Riya Sharma</td>
+                <td>4 items</td>
+                <td>₹378</td>
+                <td><span class="badge badge-success">Delivered</span></td>
+                <td style="color:var(--text-3);font-size:12px;">12 min ago</td>
+              </tr>
+              <tr>
+                <td style="font-family:monospace;font-size:12px;">#FM-1041</td>
+                <td>Arjun Mehta</td>
+                <td>2 items</td>
+                <td>₹214</td>
+                <td><span class="badge badge-info">Out for delivery</span></td>
+                <td style="color:var(--text-3);font-size:12px;">28 min ago</td>
+              </tr>
+              <tr>
+                <td style="font-family:monospace;font-size:12px;">#FM-1040</td>
+                <td>Priya Nair</td>
+                <td>7 items</td>
+                <td>₹892</td>
+                <td><span class="badge badge-warn">Preparing</span></td>
+                <td style="color:var(--text-3);font-size:12px;">35 min ago</td>
+              </tr>
+              <tr>
+                <td style="font-family:monospace;font-size:12px;">#FM-1039</td>
+                <td>Kiran Patel</td>
+                <td>3 items</td>
+                <td>₹156</td>
+                <td><span class="badge badge-success">Delivered</span></td>
+                <td style="color:var(--text-3);font-size:12px;">1 hr ago</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<script src="static/js/script.js"></script>
+</body>
+</html>
