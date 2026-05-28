@@ -1,159 +1,67 @@
-# Grocery Delivery Web App
+# 🛒 GroceryHub - Full Stack Setup & Hosting Guide
 
-A modern, responsive grocery delivery platform built with Flask and vanilla JavaScript.
-
-## Project Structure
-
-```
-grocery-delivery-web-app/
-├── app.py                 # Flask backend application
-├── requirements.txt       # Python dependencies
-├── templates/             # HTML templates (Jinja2)
-│   ├── index.html        # Home page
-│   ├── products.html     # Products listing page
-│   └── cart.html         # Shopping cart page
-├── static/               # Static files (CSS & JavaScript)
-│   ├── css/
-│   │   └── style.css     # Main stylesheet
-│   └── js/
-│       ├── script.js     # Global utilities & cart management
-│       ├── products.js   # Products page functionality
-│       └── cart.js       # Cart & checkout functionality
-├── database/             # Database folder
-│   └── grocery.db        # SQLite database (auto-created)
-└── README.md            # Documentation
-```
-
-## Features
-
-✨ **Core Features:**
-- 🛒 Shopping cart (client-side with localStorage)
-- 🔍 Product search and category filtering
-- 📦 Product inventory management
-- 💳 Checkout with customer details
-- 📊 Order tracking
-
-✅ **No Authentication:**
-- Public access to all features
-- No user accounts required
-- Simple, fast checkout process
-
-## Installation
-
-### Requirements
-- Python 3.7+
-- pip
-
-### Setup
-
-1. **Clone the repository:**
-```bash
-git clone https://github.com/Abhinav-DROID-NG/grocery-delivery-web-app.git
-cd grocery-delivery-web-app
-```
-
-2. **Create virtual environment:**
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
-3. **Install dependencies:**
-```bash
-pip install -r requirements.txt
-```
-
-4. **Run the application:**
-```bash
-python app.py
-```
-
-5. **Access the app:**
-- Open browser and go to `http://localhost:5000`
-
-## API Endpoints
-
-### Products
-- `GET /` - Home page
-- `GET /products` - Products page
-- `GET /api/products` - Get all products (JSON)
-
-### Cart
-- `GET /cart` - Shopping cart page
-- `POST /api/cart/add` - Add product to cart
-- `DELETE /api/cart/remove/<id>` - Remove from cart
-- `PUT /api/cart/update/<id>` - Update quantity
-
-### Orders
-- `POST /api/checkout` - Place order
-- `GET /api/orders` - Get all orders
-
-## Database Schema
-
-### Products Table
-```sql
-CREATE TABLE products (
-    id INTEGER PRIMARY KEY,
-    name TEXT NOT NULL,
-    category TEXT NOT NULL,
-    price REAL NOT NULL,
-    description TEXT,
-    image_url TEXT,
-    stock INTEGER DEFAULT 0,
-    created_at TIMESTAMP
-)
-```
-
-### Orders Table
-```sql
-CREATE TABLE orders (
-    id INTEGER PRIMARY KEY,
-    total_price REAL NOT NULL,
-    status TEXT DEFAULT 'pending',
-    delivery_address TEXT NOT NULL,
-    customer_name TEXT NOT NULL,
-    customer_email TEXT NOT NULL,
-    customer_phone TEXT NOT NULL,
-    created_at TIMESTAMP
-)
-```
-
-### Order Items Table
-```sql
-CREATE TABLE order_items (
-    id INTEGER PRIMARY KEY,
-    order_id INTEGER NOT NULL,
-    product_id INTEGER NOT NULL,
-    quantity INTEGER NOT NULL,
-    price REAL NOT NULL
-)
-```
-
-## Technologies Used
-
-- **Backend:** Flask, SQLite3
-- **Frontend:** HTML5, CSS3, Vanilla JavaScript
-- **Database:** SQLite
-- **Storage:** LocalStorage (client-side cart)
-
-## File Structure Explanation
-
-- **`app.py`** - Main Flask application with all routes and database operations
-- **`templates/`** - Jinja2 HTML templates rendered by Flask
-- **`static/css/style.css`** - Responsive CSS styling
-- **`static/js/script.js`** - Global utilities, cart management, and API calls
-- **`static/js/products.js`** - Products page search and filtering
-- **`static/js/cart.js`** - Cart operations and checkout logic
-- **`database/`** - Stores the SQLite database file
-
-## Contributing
-
-Feel free to fork, modify, and submit pull requests!
-
-## License
-
-This project is open source and available under the MIT License.
+This project consists of a **Node.js/Express Backend** and a **Vanilla JS Frontend**.
 
 ---
 
-**Happy Shopping! 🛒**
+## 💻 Local Setup
+
+### 1. Prerequisites
+- [Node.js](https://nodejs.org/) (v16 or higher recommended)
+- [npm](https://www.npmjs.com/) (comes with Node.js)
+
+### 2. Backend Setup
+```bash
+# Navigate to Backend directory
+cd Backend
+
+# Install dependencies
+npm install
+
+# Start the server
+node server.js
+```
+The backend will be running at `http://localhost:5000`.
+
+### 3. Frontend Setup
+The frontend is a single HTML file. You can:
+- Open `Frontend/groceryhub.html` directly in your browser.
+- **Recommended:** Use a local development server (like VS Code's "Live Server" extension or `npx serve Frontend`) to avoid CORS issues if you change the API URL.
+
+---
+
+## 🚀 Hosting & Deployment
+
+### Option 1: Render / Railway (Recommended for Backend)
+These platforms are great for Node.js apps.
+
+1.  **Push to GitHub:** Create a repository and push your code.
+2.  **Connect to Platform:** Link your GitHub repo to [Render](https://render.com/) or [Railway](https://railway.app/).
+3.  **Configure Service:**
+    *   **Build Command:** `cd Backend && npm install`
+    *   **Start Command:** `cd Backend && node server.js`
+    *   **Environment Variable:** Add `PORT=10000` (or whatever the platform requires).
+4.  **Update Frontend:** Once deployed, copy the provided URL (e.g., `https://my-api.onrender.com`) and update `API_URL` in `Frontend/groceryhub.html`.
+
+### Option 2: Vercel / Netlify (Recommended for Frontend)
+If you want to host the frontend separately:
+
+1.  Upload `Frontend/groceryhub.html` to a new repo.
+2.  Connect it to [Vercel](https://vercel.com/) or [Netlify](https://www.netlify.com/).
+3.  Set the main file as the entry point.
+
+### Important Deployment Notes:
+- **CORS:** The current `server.js` uses `app.use(cors())`, which allows all origins. For production, you should restrict this to your frontend URL.
+- **In-Memory Storage:** Since this is a "simple" backend, data is stored in memory. **Restarting the server will clear carts and orders.** For a permanent app, you would need to add a database like MongoDB or PostgreSQL.
+
+---
+
+## 🔌 API Endpoints Reference
+| Feature | Endpoint | Method |
+|---------|----------|--------|
+| Health Check | `/api/health` | GET |
+| Get Products | `/api/products` | GET |
+| Add to Cart | `/api/cart/add` | POST |
+| Create Order | `/api/orders/create` | POST |
+| Get Cart | `/api/cart` | GET |
+| Admin Stats | `/api/admin/stats` | GET |
