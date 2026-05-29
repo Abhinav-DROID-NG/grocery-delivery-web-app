@@ -50,7 +50,7 @@
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 20px;
             align-items: center;
             list-style: none;
         }
@@ -69,6 +69,25 @@
         .nav-links a.active {
             background-color: #E8F5E9;
             color: #2E7D32;
+        }
+
+        .auth-nav {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #2E7D32;
+        }
+
+        .logout-btn {
+            font-size: 12px;
+            color: #E53935;
+            cursor: pointer;
+            text-decoration: underline;
         }
 
         .cart-link {
@@ -537,6 +556,82 @@
             background-color: #1B5E20;
         }
 
+        /* Payment Section */
+        .payment-container {
+            max-width: 500px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .payment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .payment-method {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .payment-method.active {
+            border-color: #2E7D32;
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .card-input-group {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 10px;
+        }
+
+        .processing-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.9);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #2E7D32;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         .empty-cart {
             text-align: center;
             padding: 60px 20px;
@@ -713,7 +808,10 @@
                             </span>
                         </a>
                     </li>
-                    <li><a onclick="navigateTo('admin')" class="nav-link">Admin</a></li>
+                    <li id="adminNavLink"><a onclick="navigateTo('admin')" class="nav-link">Admin</a></li>
+                    <li id="authSection">
+                        <a onclick="navigateTo('login')" class="nav-link">Login</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -796,10 +894,118 @@
                         <span>Total</span>
                         <span id="total">₹0</span>
                     </div>
-                    <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+                    
+                    <div id="checkoutForm" style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 20px;">
+                        <h4 style="margin-bottom: 15px;">Delivery Details</h4>
+                        <div class="form-group">
+                            <label>Delivery Address</label>
+                            <input type="text" id="deliveryAddress" placeholder="Enter your full address">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="text" id="deliveryPhone" placeholder="Enter 10-digit mobile number">
+                        </div>
+                    </div>
+                    
+                    <button class="checkout-btn" onclick="handleCheckoutClick()">Proceed to Payment</button>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Login Page -->
+    <div class="page" id="login">
+        <div class="container">
+            <div class="form-container">
+                <h2>Welcome Back</h2>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password">
+                </div>
+                <button class="form-btn" onclick="login()">Login</button>
+                <div class="form-link">
+                    Don't have an account? <a onclick="navigateTo('signup')">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Page -->
+    <div class="page" id="signup">
+        <div class="container">
+            <div class="form-container">
+                <h2>Create Account</h2>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="signupName" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="signupEmail" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signupPassword" placeholder="Create a password">
+                </div>
+                <button class="form-btn" onclick="register()">Sign Up</button>
+                <div class="form-link">
+                    Already have an account? <a onclick="navigateTo('login')">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Page -->
+    <div class="page" id="payment">
+        <div class="container">
+            <div class="payment-container">
+                <div class="payment-header">
+                    <h2 style="color: #2E7D32;">Secure Payment</h2>
+                    <div id="paymentAmount" style="font-weight: 700; font-size: 20px;">₹0</div>
+                </div>
+                
+                <p style="margin-bottom: 20px; font-size: 14px; color: #666;">Enter your payment details to complete the order.</p>
+                
+                <div class="payment-methods">
+                    <div class="payment-method active">Credit/Debit Card</div>
+                    <div class="payment-method">UPI</div>
+                    <div class="payment-method">Wallet</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Cardholder Name</label>
+                    <input type="text" id="cardName" placeholder="Name on card">
+                </div>
+                <div class="form-group">
+                    <label>Card Number</label>
+                    <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19">
+                </div>
+                <div class="card-input-group">
+                    <div class="form-group">
+                        <label>Expiry (MM/YY)</label>
+                        <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5">
+                    </div>
+                    <div class="form-group" style="grid-column: span 2;">
+                        <label>CVV</label>
+                        <input type="password" id="cardCvv" placeholder="123" maxlength="3">
+                    </div>
+                </div>
+
+                <button class="form-btn" onclick="processPayment()">Pay Now</button>
+                <button class="form-link" style="width: 100%; background: none; border: none; margin-top: 10px;" onclick="navigateTo('cart')">Cancel and Back to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Processing Overlay -->
+    <div id="processingOverlay" class="processing-overlay">
+        <div class="spinner"></div>
+        <h3 id="processingText">Processing Payment...</h3>
+        <p>Please do not close this window</p>
     </div>
 
     <!-- Admin Page -->
@@ -841,15 +1047,102 @@
     <script>
         const API_URL = 'http://localhost:5000';
         let cart = [];
-        let products = []; // Will be fetched from backend
+        let products = [];
+        let currentUser = JSON.parse(localStorage.getItem('user')) || null;
+        let pendingOrder = null;
 
         // Initialize
         async function init() {
+            updateAuthUI();
             await fetchProducts();
             renderHomeProducts();
             renderProducts();
             updateCartCount();
             renderInventory();
+        }
+
+        function getHeaders() {
+            const headers = { 'Content-Type': 'application/json' };
+            if (currentUser) {
+                headers['user-email'] = currentUser.email;
+            }
+            return headers;
+        }
+
+        function updateAuthUI() {
+            const authSection = document.getElementById('authSection');
+            if (currentUser) {
+                authSection.innerHTML = `
+                    <div class="auth-nav">
+                        <span class="user-name">Hi, ${currentUser.name.split(' ')[0]}</span>
+                        <span class="logout-btn" onclick="logout()">Logout</span>
+                    </div>
+                `;
+            } else {
+                authSection.innerHTML = `<a onclick="navigateTo('login')" class="nav-link">Login</a>`;
+            }
+        }
+
+        // Auth Functions
+        async function login() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (!email || !password) return alert('Please fill in all fields');
+
+            try {
+                const response = await fetch(`${API_URL}/api/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await response.json();
+                if (data.success) {
+                    currentUser = data.user;
+                    localStorage.setItem('user', JSON.stringify(currentUser));
+                    updateAuthUI();
+                    await fetchCart(); // Get user's cart
+                    navigateTo('home');
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+            }
+        }
+
+        async function register() {
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+
+            if (!name || !email || !password) return alert('Please fill in all fields');
+
+            try {
+                const response = await fetch(`${API_URL}/api/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password })
+                });
+                const data = await response.json();
+                if (data.success) {
+                    alert('Registration successful! Please login.');
+                    navigateTo('login');
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                console.error('Registration error:', error);
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('user');
+            cart = [];
+            updateAuthUI();
+            updateCartCount();
+            navigateTo('home');
         }
 
         async function fetchProducts(category = null) {
@@ -889,7 +1182,8 @@
 
         function updateActiveNav(page) {
             document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-            document.querySelector(`a[onclick="navigateTo('${page}')"]`)?.classList.add('active');
+            const link = document.querySelector(`a[onclick="navigateTo('${page}')"]`);
+            if (link) link.classList.add('active');
         }
 
         // Product Rendering
@@ -928,9 +1222,7 @@
             try {
                 const response = await fetch(`${API_URL}/api/cart/add`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: getHeaders(),
                     body: JSON.stringify({ productId, quantity: 1 })
                 });
                 const data = await response.json();
@@ -946,7 +1238,9 @@
 
         async function fetchCart() {
             try {
-                const response = await fetch(`${API_URL}/api/cart`);
+                const response = await fetch(`${API_URL}/api/cart`, {
+                    headers: getHeaders()
+                });
                 const data = await response.json();
                 if (data.success) {
                     cart = data.cart.items;
@@ -960,7 +1254,8 @@
         async function removeFromCart(productId) {
             try {
                 const response = await fetch(`${API_URL}/api/cart/remove/${productId}`, {
-                    method: 'DELETE'
+                    method: 'DELETE',
+                    headers: getHeaders()
                 });
                 const data = await response.json();
                 if (data.success) {
@@ -978,9 +1273,7 @@
             try {
                 const response = await fetch(`${API_URL}/api/cart/update`, {
                     method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: getHeaders(),
                     body: JSON.stringify({ productId, quantity })
                 });
                 const data = await response.json();
@@ -1033,7 +1326,9 @@
 
         async function updateCartSummary() {
             try {
-                const response = await fetch(`${API_URL}/api/cart`);
+                const response = await fetch(`${API_URL}/api/cart`, {
+                    headers: getHeaders()
+                });
                 const data = await response.json();
                 if (data.success) {
                     const { subtotal, tax, delivery, grandTotal } = data.cart;
@@ -1041,6 +1336,7 @@
                     document.getElementById('tax').textContent = '₹' + tax;
                     document.getElementById('delivery').textContent = '₹' + delivery;
                     document.getElementById('total').textContent = '₹' + grandTotal;
+                    document.getElementById('paymentAmount').textContent = '₹' + grandTotal;
                 }
             } catch (error) {
                 console.error('Error updating cart summary:', error);
@@ -1069,31 +1365,80 @@
             });
         }
 
-        // Checkout
-        async function checkout() {
+        // Checkout & Payment Flow
+        function handleCheckoutClick() {
+            if (!currentUser) {
+                alert('Please login to continue');
+                navigateTo('login');
+                return;
+            }
+
+            const address = document.getElementById('deliveryAddress').value;
+            const phone = document.getElementById('deliveryPhone').value;
+
+            if (!address || !phone) {
+                alert('Please enter delivery address and phone number');
+                return;
+            }
+
+            pendingOrder = { address, phone };
+            navigateTo('payment');
+        }
+
+        async function processPayment() {
+            const cardNumber = document.getElementById('cardNumber').value;
+            const expiry = document.getElementById('cardExpiry').value;
+            const cvv = document.getElementById('cardCvv').value;
+
+            if (!cardNumber || !expiry || !cvv) {
+                alert('Please fill in all payment details');
+                return;
+            }
+
+            const overlay = document.getElementById('processingOverlay');
+            overlay.style.display = 'flex';
+
             try {
-                const response = await fetch(`${API_URL}/api/orders/create`, {
+                // Step 1: Process Payment
+                const payResponse = await fetch(`${API_URL}/api/payment/process`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        deliveryAddress: '123 Test Street, City',
-                        phone: '9999999999'
-                    })
+                    headers: getHeaders(),
+                    body: JSON.stringify({ cardNumber, expiry, cvc: cvv })
                 });
-                const data = await response.json();
-                if (data.success) {
-                    alert(`Order placed successfully! Order ID: ${data.order.id}`);
-                    cart = [];
-                    updateCartCount();
-                    renderCart();
-                    navigateTo('home');
+                const payData = await payResponse.json();
+
+                if (payData.success) {
+                    document.getElementById('processingText').textContent = 'Payment Confirmed! Placing Order...';
+                    
+                    // Step 2: Create Order
+                    const orderResponse = await fetch(`${API_URL}/api/orders/create`, {
+                        method: 'POST',
+                        headers: getHeaders(),
+                        body: JSON.stringify({
+                            deliveryAddress: pendingOrder.address,
+                            phone: pendingOrder.phone,
+                            paymentId: payData.transactionId
+                        })
+                    });
+                    const orderData = await orderResponse.json();
+
+                    if (orderData.success) {
+                        setTimeout(() => {
+                            overlay.style.display = 'none';
+                            alert(`Order placed successfully! Order ID: ${orderData.order.id}`);
+                            cart = [];
+                            updateCartCount();
+                            navigateTo('home');
+                        }, 1000);
+                    } else {
+                        throw new Error(orderData.message);
+                    }
                 } else {
-                    alert('Order failed: ' + data.message);
+                    throw new Error(payData.message);
                 }
             } catch (error) {
-                console.error('Checkout error:', error);
+                overlay.style.display = 'none';
+                alert('Transaction Failed: ' + error.message);
             }
         }
 
